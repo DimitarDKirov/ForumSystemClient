@@ -12,11 +12,13 @@ import { UserService } from './services/user-service.service';
 import { ThreadsService } from './services/threads.service';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { ThreadAddComponent } from './components/thread-add/thread-add.component';
+import { ThreadListComponent } from './components/thread-list/thread-list.component';
 
 const appRoutes: Routes = [
   { path: 'user/registration', component: UserRegistrationComponent },
   { path: 'user/login', component: UserLoginComponent },
   { path: 'thread/add', component: ThreadAddComponent },
+  { path: 'thread/list', component: ThreadListComponent }
   /*{ path: 'hero/:id',      component: HeroDetailComponent },
   {
     path: 'heroes',
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     FooterComponent,
     UserRegistrationComponent,
     UserLoginComponent,
-    ThreadAddComponent
+    ThreadAddComponent,
+    ThreadListComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
