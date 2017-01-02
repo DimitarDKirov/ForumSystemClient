@@ -1,4 +1,4 @@
-import { Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Constants } from '../constants';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable, Subject } from '../../../node_modules/rxjs/Rx';
@@ -6,8 +6,8 @@ import { Observable, Subject } from '../../../node_modules/rxjs/Rx';
 @Injectable()
 export class UserService {
   private http: Http;
-  private registerUrl: string = "/api/account/register";
-  private loginUrl: string = "/token";
+  private registerUrl: string = '/api/account/register';
+  private loginUrl: string = '/token';
   private userLogging = new Subject<string>();
   userStatus = this.userLogging.asObservable();
 
@@ -17,10 +17,10 @@ export class UserService {
 
   registerUser(username: string, password: string, email: string): Observable<any> {
     const data = {
-      "email": email,
-      "password": password,
-      "ConfirmPassword": password,
-      "nickname": username
+      'email': email,
+      'password': password,
+      'ConfirmPassword': password,
+      'nickname': username
     };
 
     return this.http
@@ -28,7 +28,7 @@ export class UserService {
       .catch(this.processRegisterError);
   }
 
-  loginUser(email: string, password: string): Observable<any> {
+  loginUser(email: string, password: string): Observable<string> {
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
 
@@ -50,11 +50,18 @@ export class UserService {
     this.userLogging.next(null);
   }
 
+  authPost(url: string, data: any): Observable<Response> {
+    const token = localStorage.getItem('token')
+    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(url, data, options);
+  }
+
   private storeUserDetails(res: Response, instance: UserService): string {
     const token = res.json().access_token;
     const username = res.json().userName;
-    localStorage.setItem("token", token);
-    localStorage.setItem("username", username);
+    localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
     instance.userLogging.next(username);
     return username;
   }
@@ -65,7 +72,7 @@ export class UserService {
   }
 
   private processRegisterError(err: Response | any): Observable<string[]> {
-    const errorMessages = err.json()["ModelState"][""][0];
+    const errorMessages = err.json()['ModelState'][''][0];
     return Observable.throw(errorMessages);
   }
 }
