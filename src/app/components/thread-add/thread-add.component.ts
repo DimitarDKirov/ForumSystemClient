@@ -8,8 +8,8 @@ import { ThreadsService } from '../../services/threads.service';
   styleUrls: ['./thread-add.component.css']
 })
 export class ThreadAddComponent implements OnInit {
-  title: string = 'hello';
-  content: string = 'consne';
+  title: string;
+  content: string;
 
   constructor(private threadsService: ThreadsService) { }
 

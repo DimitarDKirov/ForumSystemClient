@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './services/user-service.service';
 import { ThreadsService } from './services/threads.service';
 import { PostsService } from './services/posts.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { ThreadAddComponent } from './components/thread-add/thread-add.component';
 import { ThreadListComponent } from './components/thread-list/thread-list.component';
@@ -23,7 +24,7 @@ import { HomeComponent } from './components/home/home.component';
 const appRoutes: Routes = [
   { path: 'user/registration', component: UserRegistrationComponent },
   { path: 'user/login', component: UserLoginComponent },
-  { path: 'thread/add', component: ThreadAddComponent },
+  { path: 'thread/add', component: ThreadAddComponent, canActivate:[AuthGuardService] },
   { path: 'thread/list', component: ThreadListComponent },
   { path: 'thread/details/:id', component: ThreadDetailsComponent },
   { path: '', component: HomeComponent },
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
   providers: [
     UserService,
     ThreadsService,
-    PostsService
+    PostsService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
