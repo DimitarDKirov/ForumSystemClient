@@ -10,15 +10,19 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './services/user-service.service';
 import { ThreadsService } from './services/threads.service';
+import { PostsService } from './services/posts.service';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { ThreadAddComponent } from './components/thread-add/thread-add.component';
 import { ThreadListComponent } from './components/thread-list/thread-list.component';
+import { ThreadDetailsComponent } from './components/thread-details/thread-details.component';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
 
 const appRoutes: Routes = [
   { path: 'user/registration', component: UserRegistrationComponent },
   { path: 'user/login', component: UserLoginComponent },
   { path: 'thread/add', component: ThreadAddComponent },
-  { path: 'thread/list', component: ThreadListComponent }
+  { path: 'thread/list', component: ThreadListComponent },
+  { path: 'thread/details/:id', component: ThreadDetailsComponent }
   /*{ path: 'hero/:id',      component: HeroDetailComponent },
   {
     path: 'heroes',
@@ -40,7 +44,9 @@ const appRoutes: Routes = [
     UserRegistrationComponent,
     UserLoginComponent,
     ThreadAddComponent,
-    ThreadListComponent
+    ThreadListComponent,
+    ThreadDetailsComponent,
+    PostsListComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -50,7 +56,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     UserService,
-    ThreadsService
+    ThreadsService,
+    PostsService
   ],
   bootstrap: [AppComponent]
 })

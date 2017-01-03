@@ -2,7 +2,7 @@
   <h2>List of the threads</h2>
 </div>
 <div class="list-group">
-  <a href="#" class="list-group-item" *ngFor="let thread of threads">
+  <a (click)="viewDetails(thread)" class="list-group-item" *ngFor="let thread of threads">
     <h4 class="list-group-item-heading">{{thread.Title}}</h4>
     <p class="list-group-item-text">by {{thread.Creator}} at {{thread.DateCreated|date:'dd/MM/yyyy HH:mm:ss'}}</p>
   </a>

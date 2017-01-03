@@ -29,14 +29,27 @@ export class ThreadsService {
       .catch(this.processError);
   }
 
-  listThreads(): any {
+  listThreads(): Observable<Thread[]> {
     return this.http
       .get(Constants.server + this.threadUrl)
       .map(this.extractThreads);
   }
 
-  private extractResult(result: Response): Observable<Thread> {
-    return result.json();
+  getThreadById(id: number): Observable<any> {
+    const url = Constants.server + this.threadUrl + '/' + id;
+    return this.http
+      .get(url)
+      .map(this.extractResult)
+      .catch(this.processThreadDetailsError);
+  }
+
+  private extractResult(res: Response): Thread {
+    const result = res.json();
+    let thread = new Thread(result.Title, result.Content);
+    thread.Creator = result.Creator;
+    thread.Id = result.Id;
+    thread.DateCreated = result.DateCreated;
+    return thread;
   }
 
   private processError(err: Response | any): Observable<string[]> {
@@ -57,4 +70,7 @@ export class ThreadsService {
     return threads;
   }
 
+  private processThreadDetailsError(err: Response | any): Observable<string> {
+    return Observable.throw(err.json()['Message']);
+  }
 }

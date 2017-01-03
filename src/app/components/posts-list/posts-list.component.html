@@ -1,0 +1,23 @@
+
+<div class="list-group">
+  <a class="list-group-item"  *ngFor="let post of posts">
+    <h4 class="list-group-item-heading">{{post.Content}}</h4>
+    <p class="list-group-item-text">by {{post.NickName}} at {{post.PostDate}}</p>
+  </a>
+</div>
+
+
+<form *ngIf="!!username" (ngSubmit)="onSubmit(); postAddForm.reset()" #postAddForm="ngForm">
+  <div class="form-group">
+    <label for="newPost" class="col-sm-1 control-label">Add Post</label>
+    <div class="col-sm-7">
+      <textarea class="form-control" id="newPost" [(ngModel)]="newPost" name="post" required minlength="10" maxlength="2000" #postInput=ngModel></textarea>
+    </div>
+    <div [hidden]="postInput.valid || postInput.pristine" class="text-danger col-sm-3">Post must be between 10 and 2000 symbols long </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-default" [disabled]="!postAddForm.form.valid">Add post</button>
+    </div>
+  </div>
+</form>

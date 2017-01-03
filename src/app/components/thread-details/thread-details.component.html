@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h2>{{thread?.Title}}</h2>
+</div>
+<div class="col-sm-offset-1">
+
+  {{thread?.Content}}
+  <hr/> by {{thread?.Creator}} at {{thread?.DateCreated|date}}
+
+</div>
+<div class="page-header">
+  <h3>Posts</h3>
+</div>
+<forum-system-posts-list *ngIf="thread" [threadId]="thread.Id"></forum-system-posts-list>
