@@ -16,24 +16,18 @@ import { ThreadAddComponent } from './components/thread-add/thread-add.component
 import { ThreadListComponent } from './components/thread-list/thread-list.component';
 import { ThreadDetailsComponent } from './components/thread-details/thread-details.component';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
+import { AboutComponent } from './components/about/about.component';
+import { DateTimePipe } from './pipes/date-time.pipe';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [
   { path: 'user/registration', component: UserRegistrationComponent },
   { path: 'user/login', component: UserLoginComponent },
   { path: 'thread/add', component: ThreadAddComponent },
   { path: 'thread/list', component: ThreadListComponent },
-  { path: 'thread/details/:id', component: ThreadDetailsComponent }
-  /*{ path: 'hero/:id',      component: HeroDetailComponent },
-  {
-    path: 'heroes',
-    component: HeroListComponent,
-    data: { title: 'Heroes List' }
-  },
-  { path: '',
-    redirectTo: '/heroes',
-    pathMatch: 'full'
-  },
-  { path: '**', component: PageNotFoundComponent }*/
+  { path: 'thread/details/:id', component: ThreadDetailsComponent },
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent }
 ];
 
 @NgModule({
@@ -46,7 +40,10 @@ const appRoutes: Routes = [
     ThreadAddComponent,
     ThreadListComponent,
     ThreadDetailsComponent,
-    PostsListComponent
+    PostsListComponent,
+    AboutComponent,
+    DateTimePipe,
+    HomeComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'forum-system-header',
@@ -9,7 +10,7 @@ import { UserService } from '../../services/user-service.service';
 export class HeaderComponent implements OnInit {
   username: string;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router:Router) {
     this.userService.userStatus.subscribe(user => { console.log(user); this.username = user; });
   }
 
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this.userService.logoutUser();
+    this.router.navigate(['']);
   }
 
 
