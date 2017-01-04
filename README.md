@@ -1,4 +1,4 @@
-# Course project for Angular 2 applications course in Telerik Academy
+# Course project for SPA Applications with Angular 2 course at Telerik Academy
 ----------------------------------
 
 ##Team Directive9:
