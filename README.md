@@ -9,8 +9,17 @@
 ##GitHub repository
 https://github.com/DimitarDKirov/ForumSystemClient
 
+##GitHub repository of the server together with the client in production mode
+https://github.com/DimitarDKirov/Forum-Paulo-Coelho.git
+
+##Online available on Azure
+http://forumsystem.azurewebsites.net/
+
+##best.telerikacademy.com
+http://best.telerikacademy.com/projects/461/Simple-Forum
+
 ##Project description
-This project is a simple forum application in Angular 2. It is intended to work with Rest Web Api server available on Github https://github.com/DimitarDKirov/Forum-Paulo-Coelho.
+This project is a simple forum application in Angular 2. It is intended to work with RestFull Web Api server available on Github https://github.com/DimitarDKirov/Forum-Paulo-Coelho.
 Unregistered users are able to see all threads available in the system:
 
 ![threads](./images/threads.PNG)
