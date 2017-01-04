@@ -4,6 +4,6 @@
 <div class="list-group">
   <a (click)="viewDetails(thread)" class="list-group-item" *ngFor="let thread of threads">
     <h4 class="list-group-item-heading">{{thread.Title}}</h4>
-    <p class="list-group-item-text">by {{thread.Creator}} at {{thread.DateCreated|dateTime}}</p>
+    <p class="list-group-item-text">by <span class="text-info">{{thread.Creator}}</span> at <span class="text-info">{{thread.DateCreated|dateTime}}</span></p>
   </a>
 </div>

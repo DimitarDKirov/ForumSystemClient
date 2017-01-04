@@ -1,8 +1,7 @@
-
 <div class="list-group">
-  <a class="list-group-item"  *ngFor="let post of posts">
+  <a class="list-group-item" *ngFor="let post of posts">
     <h4 class="list-group-item-heading">{{post.Content}}</h4>
-    <p class="list-group-item-text">by {{post.NickName}} at {{post.PostDate|dateTime}}</p>
+    <p class="list-group-item-text text-muted">by <span class="text-info">{{post.NickName}}</span> at <span class="text-info">{{post.PostDate|dateTime}}</span></p>
   </a>
 </div>
 

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Constants } from '../constants';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable, Subject } from '../../../node_modules/rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class UserService {
@@ -72,7 +74,11 @@ export class UserService {
   }
 
   private processRegisterError(err: Response | any): Observable<string[]> {
-    const errorMessages = err.json()['ModelState'][''][0];
+    const errors = err.json()['ModelState'];
+    let errorMessages;
+    if (errors['model.NickName']) errorMessages = errors['model.NickName'];
+    else if (errors[""]) errorMessages = errors[""];
+
     return Observable.throw(errorMessages);
   }
 }

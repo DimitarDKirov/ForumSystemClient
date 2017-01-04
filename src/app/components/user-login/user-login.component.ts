@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user-service.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'forum-system-user-login',
@@ -11,28 +12,28 @@ export class UserLoginComponent implements OnInit {
   username: string;
   password: string;
   email: string;
-  error: string;
 
   private userService: UserService;
   private router: Router;
+  private notificationService: NotificationService;
 
-  constructor(userService: UserService, router: Router) {
+  constructor(userService: UserService, router: Router, notification: NotificationService) {
     this.userService = userService;
     this.router = router;
+    this.notificationService = notification;
   }
 
   ngOnInit() { }
 
   onSubmit() {
-    this.error = null;
     this.userService
       .loginUser(this.email, this.password)
-      .subscribe(() => this.onLogin(this), err => this.error = err);
+      .subscribe(() => this.onLogin(this), err => this.notificationService.error(err));
   }
 
   private onLogin(instance: UserLoginComponent) {
-    instance.error = null;
-    instance.router.navigate(['/']);
+    instance.notificationService.success("Login successfull");
+    instance.router.navigate(['thread/list']);
   }
 
 }

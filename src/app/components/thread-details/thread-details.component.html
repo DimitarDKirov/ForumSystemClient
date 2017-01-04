@@ -1,10 +1,10 @@
 <div class="page-header">
   <h2>{{thread?.Title}}</h2>
 </div>
-<div class="col-sm-offset-1">
+<div class="col-sm-offset-1" *ngIf="thread">
 
   {{thread?.Content}}
-  <hr/> by {{thread?.Creator}} at {{thread?.DateCreated|dateTime}}
+  <p class="text-muted"> by <span class="text-info">{{thread?.Creator}}</span> at <span class="text-info">{{thread?.DateCreated|dateTime}}</span></p>
 
 </div>
 <div class="page-header">

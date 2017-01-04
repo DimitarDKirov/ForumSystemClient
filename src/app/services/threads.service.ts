@@ -3,7 +3,9 @@ import { Constants } from '../constants';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { UserService } from './user-service.service';
 import { Thread } from '../models/thread';
-import { Observable, Subject } from '../../../node_modules/rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ThreadsService {

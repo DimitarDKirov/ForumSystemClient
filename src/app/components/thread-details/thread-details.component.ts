@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ThreadsService } from '../../services/threads.service';
-import {PostsService} from '../../services/posts.service';
+import { NotificationService } from '../../services/notification.service';
 import { Thread } from '../../models/thread';
 
 @Component({
@@ -14,25 +14,19 @@ export class ThreadDetailsComponent implements OnInit {
   private route: ActivatedRoute;
   private router: Router;
   private threadsService: ThreadsService;
-  private postsService:PostsService;
+  private notificationService: NotificationService;
 
-  constructor(route: ActivatedRoute, router: Router, threadsService: ThreadsService, postsService:PostsService) {
+  constructor(route: ActivatedRoute, router: Router, threadsService: ThreadsService, notificationService: NotificationService) {
     this.route = route;
     this.router = router;
     this.threadsService = threadsService;
-    this.postsService=postsService;
+    this.notificationService = notificationService;
   }
 
   ngOnInit() {
     let threadId = + this.route.snapshot.params['id'];
     this.threadsService
       .getThreadById(threadId)
-      .subscribe(thread => this.thread = thread, console.log);
-
-this.postsService
-.getPostsByThreadId(threadId);
-
-
+      .subscribe(thread => this.thread = thread, err => this.notificationService.error(err));
   }
-
 }

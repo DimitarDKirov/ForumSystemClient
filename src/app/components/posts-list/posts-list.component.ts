@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
 import { UserService } from '../../services/user-service.service';
+import { NotificationService } from '../../services/notification.service';
 import { Post } from '../../models/post';
 
 @Component({
@@ -15,17 +16,19 @@ export class PostsListComponent implements OnInit {
   username: string;
   private postsService: PostsService;
   private userService: UserService;
+  private notificationService: NotificationService;
 
-  constructor(postsService: PostsService, userService: UserService) {
+  constructor(postsService: PostsService, userService: UserService, notificationService: NotificationService) {
     this.postsService = postsService;
     this.userService = userService;
+    this.notificationService = notificationService;
   }
 
   ngOnInit() {
     this.username = this.userService.getUsername();
     this.postsService
       .getPostsByThreadId(this.threadId)
-      .subscribe(posts => this.posts = posts);
+      .subscribe(posts => this.posts = posts, console.log);
   }
 
   onSubmit() {
@@ -38,7 +41,9 @@ export class PostsListComponent implements OnInit {
       .addPost(post, this.threadId)
       .subscribe(() => {
         this.posts.push(post);
-      }, console.log);
+        this.notificationService.success('Post added successfully');
+      },
+      err => this.notificationService.error(err));
   }
 
 }

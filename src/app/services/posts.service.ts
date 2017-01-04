@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Constants } from '../constants';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Post } from '../models/post';
 import { UserService } from './user-service.service';
-import { Observable, Subject } from '../../../node_modules/rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PostsService {
@@ -20,16 +20,17 @@ export class PostsService {
     const url = Constants.server + this.postsUtl + '?threadId=' + threadId;
     return this.http
       .get(url)
-      .map(this.parsePosts);
-
+      .map(this.parsePosts)
   }
 
-  addPost(post: Post, threadId: number) {
+  addPost(post: Post, threadId: number): Observable<string[]> {
     const url = Constants.server + this.postsUtl + '?threadId=' + threadId;
     let data = {
       content: post.Content
     };
-    return this.userService.authPost(url, data);
+    return this.userService
+      .authPost(url, data)
+      .catch(this.processError);
   }
 
   private parsePosts(res: Response | any): Post[] {
@@ -41,5 +42,9 @@ export class PostsService {
       post.PostDate = input.PostDate;
       return post;
     });
+  }
+
+  private processError(res: Response | any): Observable<string[]> {
+    return Observable.throw(res.json()['Message']);
   }
 }
